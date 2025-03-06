@@ -67,7 +67,18 @@ with layout2:
         df = pd.DataFrame(st.session_state.trades, columns=['Action', 'Shares', 'Price'])
 
         # Make DataFrame editable
-        edited_df = st.data_editor(df, use_container_width=True, num_rows='dynamic')
+        edited_df = st.data_editor(
+            df,
+            use_container_width=True,
+            num_rows='dynamic',
+            column_config={
+                'Action': st.column_config.SelectboxColumn(
+                    'Action',
+                    options=['Buy', 'Sell'],
+                    required=True
+                )
+            }
+        )
 
         # Save the edited DataFrame back to session state
         st.session_state.trades = edited_df.values.tolist()
