@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-st.set_page_config(page_title='Stock Average Down Calculator', page_icon='', layout='wide')
+st.set_page_config(page_title='Stock Average Down Calculator', page_icon='icons/sadcalculator_icon.svg', layout='wide')
 st.markdown('<h2 style="text-align:center">Stock Average Down Calculator for Day Traders</h2>',
             unsafe_allow_html=True)
 
