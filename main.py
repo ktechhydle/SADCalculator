@@ -52,16 +52,21 @@ with layout1:
 
 with layout2:
     st.subheader('Trade History')
+
     if st.session_state.trades:
-        df = pd.DataFrame(st.session_state.trades,
-                          columns=['Action', 'Shares', 'Price'])
-        st.dataframe(df, use_container_width=True)
+        df = pd.DataFrame(st.session_state.trades, columns=['Action', 'Shares', 'Price'])
+
+        # Make DataFrame editable
+        edited_df = st.data_editor(df, use_container_width=True, num_rows='dynamic')
+
+        # Save the edited DataFrame back to session state
+        st.session_state.trades = edited_df.values.tolist()
 
         # Calculate and display average cost
-        avg_price, remaining_shares = calculate_average(
-            st.session_state.trades)
-        st.markdown(f'**Remaining Shares:** {remaining_shares}')
+        avg_price, remaining_shares = calculate_average(st.session_state.trades)
+        st.markdown(f'**Remaining Shares:** {int(remaining_shares)}')
         st.markdown(f'**Average Cost per Share:** ${avg_price:.2f}')
+
     else:
         st.write('No trades entered yet.')
 
