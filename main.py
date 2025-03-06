@@ -43,11 +43,20 @@ with layout1:
                             format='%.2f',
                             help='The price of the bought share')
 
-    if st.button('Add Trade'):
-        st.session_state.trades.append((action, shares, price))
+    add_trade_btn, remove_trade_btn, clear_trades_btn = st.columns(3)
 
-    if st.button('Remove Last Trade') and st.session_state.trades:
-        st.session_state.trades.pop()
+    with add_trade_btn:
+        if st.button('Add Trade'):
+            st.session_state.trades.append((action, shares, price))
+
+    with remove_trade_btn:
+        if st.button('Remove Last Trade') and st.session_state.trades:
+            st.session_state.trades.pop()
+
+    with clear_trades_btn:
+        if st.button('Clear All Trades') and st.session_state.trades:
+            st.session_state.trades.clear()
+
 
 with layout2:
     if st.session_state.trades:
