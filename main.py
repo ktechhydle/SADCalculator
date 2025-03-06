@@ -61,7 +61,6 @@ with layout1:
         if st.button('Clear All Trades') and st.session_state.trades:
             st.session_state.trades.clear()
 
-
 with layout2:
     if st.session_state.trades:
         df = pd.DataFrame(st.session_state.trades, columns=['Action', 'Shares', 'Price'])
@@ -75,6 +74,19 @@ with layout2:
                 'Action': st.column_config.SelectboxColumn(
                     'Action',
                     options=['Buy', 'Sell'],
+                    required=True
+                ),
+                'Shares': st.column_config.NumberColumn(
+                    'Shares',
+                    min_value=1,
+                    step=1,
+                    required=True
+                ),
+                'Price': st.column_config.NumberColumn(
+                    'Price',
+                    min_value=0.01,
+                    step=0.01,
+                    format='$ %.2f',
                     required=True
                 )
             }
