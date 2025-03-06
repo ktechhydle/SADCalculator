@@ -9,6 +9,7 @@ st.markdown('<h2 style="text-align:center">Stock Average Down Calculator for Day
 if 'trades' not in st.session_state:
     st.session_state.trades = []
 
+
 # Function to calculate the average cost
 def calculate_average(trades):
     total_cost = 0
@@ -19,7 +20,7 @@ def calculate_average(trades):
         if action == 'Buy':
             total_cost += shares * price
             total_shares += shares
-        elif action == "Sell":
+        elif action == 'Sell':
             if total_shares > 0:
                 avg_price = total_cost / total_shares if total_shares else 0
                 cost_removed = min(shares, total_shares) * avg_price
@@ -28,6 +29,7 @@ def calculate_average(trades):
 
     avg_cost = (total_cost / total_shares) if total_shares > 0 else 0
     return avg_cost, total_shares
+
 
 # Layout
 layout1, layout2 = st.columns(2)
@@ -40,10 +42,13 @@ with layout1:
     price = st.number_input('Price per Share',
                             min_value=0.01,
                             step=0.01,
-                            format="%.2f")
+                            format='%.2f')
 
     if st.button('Add Trade'):
         st.session_state.trades.append((action, shares, price))
+
+    if st.button('Remove Last Trade') and st.session_state.trades:
+        st.session_state.trades.pop()
 
 with layout2:
     st.subheader('Trade History')
