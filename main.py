@@ -35,8 +35,6 @@ def calculate_average(trades):
 layout1, layout2 = st.columns(2)
 
 with layout1:
-    st.subheader('Enter Trade Details')
-
     action = st.selectbox('Trade Type', ['Buy', 'Sell'], help='The share type (Buy or Sell)')
     shares = st.number_input('\\# of Shares', min_value=1, step=1, help='The number of shares purchased')
     price = st.number_input('Price per Share',
@@ -52,8 +50,6 @@ with layout1:
         st.session_state.trades.pop()
 
 with layout2:
-    st.subheader('Trade History')
-
     if st.session_state.trades:
         df = pd.DataFrame(st.session_state.trades, columns=['Action', 'Shares', 'Price'])
 
