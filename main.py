@@ -43,7 +43,7 @@ with layout1:
                             format='%.2f',
                             help='The price of the bought share')
 
-    add_trade_btn, remove_trade_btn, clear_trades_btn = st.columns(3)
+    add_trade_btn, remove_trade_btn, reverse_trades_btn, clear_trades_btn = st.columns(4)
 
     with add_trade_btn:
         if st.button('Add Trade'):
@@ -52,6 +52,10 @@ with layout1:
     with remove_trade_btn:
         if st.button('Remove Last Trade') and st.session_state.trades:
             st.session_state.trades.pop()
+
+    with reverse_trades_btn:
+        if st.button('Reverse Trades') and st.session_state.trades:
+            st.session_state.trades.reverse()
 
     with clear_trades_btn:
         if st.button('Clear All Trades') and st.session_state.trades:
