@@ -37,12 +37,13 @@ layout1, layout2 = st.columns(2)
 with layout1:
     st.subheader('Enter Trade Details')
 
-    action = st.selectbox('Trade Type', ['Buy', 'Sell'])
-    shares = st.number_input('Number of Shares', min_value=1, step=1)
+    action = st.selectbox('Trade Type', ['Buy', 'Sell'], help='The share type (Buy or Sell)')
+    shares = st.number_input('\\# of Shares', min_value=1, step=1, help='The number of shares purchased')
     price = st.number_input('Price per Share',
                             min_value=0.01,
                             step=0.01,
-                            format='%.2f')
+                            format='%.2f',
+                            help='The price of the bought share')
 
     if st.button('Add Trade'):
         st.session_state.trades.append((action, shares, price))
@@ -70,4 +71,5 @@ with layout2:
     else:
         st.write('No trades entered yet.')
 
-st.markdown('_Copyright (©) Keller Hydle_')
+st.markdown('''_Copyright (©) Keller Hydle_ 
+###### Warning: this calculator cannot guarantee perfect results''')
