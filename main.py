@@ -63,6 +63,8 @@ with layout1:
 
 with layout2:
     if st.session_state.trades:
+        st.write('Preview')
+
         df = pd.DataFrame(st.session_state.trades, columns=['Action', 'Shares', 'Price'])
 
         # Make DataFrame editable
